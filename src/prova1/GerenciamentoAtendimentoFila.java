@@ -23,23 +23,23 @@ class Elemento {
 }
 
 class Fila {
-    private No prox;
-    private No ante;
+    private No frente;
+    private No tras;
 
     public Fila() {
-        this.prox = null;
-        this.ante = null;
+        this.frente = null;
+        this.tras = null;
     }
 
     public void adicionar(Elemento elemento) {
         try {
             No novoNode = new No(elemento);
-            if (ante != null) {
-                ante.proximo = novoNode; 
+            if (tras != null) {
+                tras.proximo = novoNode; 
             }
-            ante = novoNode; 
-            if (prox == null) { 
-                prox = ante;
+            tras = novoNode; 
+            if (frente == null) { 
+                frente = tras;
             }
             System.out.println("Cliente adicionado a fila: " + elemento);
         } catch (Exception e) {
@@ -51,10 +51,10 @@ class Fila {
         if (filaVazia()) {
             throw new Exception("A fila esta vazia!!");
         }
-        Elemento clienteAtendido = prox.elemento;
-        prox = prox.proximo; 
-        if (prox == null) { 
-            ante = null;
+        Elemento clienteAtendido = frente.elemento;
+        frente = frente.proximo; 
+        if (frente == null) { 
+            tras = null;
         }
         System.out.println("Cliente atendido: " + clienteAtendido);
         return clienteAtendido;
@@ -62,12 +62,12 @@ class Fila {
 
     public void mostrarTodos() {
         try {
-            if (prox == null) {
+            if (frente == null) {
                 System.out.println("A fila esta vazia.");
                 return;
             }
             System.out.println("Clientes na fila:");
-            No atual = prox;
+            No atual = frente;
             while (atual != null) {
                 System.out.println(atual.elemento);
                 atual = atual.proximo; 
@@ -78,7 +78,7 @@ class Fila {
     }
 
     public boolean filaVazia() {
-        return prox == null;
+        return frente == null;
     }
 }
 
